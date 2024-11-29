@@ -1,0 +1,193 @@
+/* frontend/assets/css/home.css */
+.home-container {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.home-container h1 {
+    text-align: center;
+    color: var(--text-color);
+    margin-bottom: 40px;
+    font-size: 32px;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.options-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    animation: slideUp 0.5s ease-out;
+}
+
+.option-card {
+    background: var(--white);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    width: 300px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.option-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.option-card h3 {
+    font-size: 24px;
+    margin-bottom: 0px;
+    color: var(--primary-color);
+    text-align: center;
+}
+
+.option-card p {
+    color: #666;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.option-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--primary-color);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+.option-card:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* Header with user info */
+.header {
+    background: var(--white);
+    padding: 15px 30px;
+    box-shadow: var(--shadow);
+    margin-bottom: 40px;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logout-btn {
+    padding: 8px 20px;
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .home-container h1 {
+        font-size: 24px;
+    }
+    
+    .options-container {
+        gap: 20px;
+    }
+    
+    .option-card {
+        width: 100%;
+        max-width: 400px;
+    }
+    
+    .header {
+        padding: 15px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .home-container {
+        padding: 20px 15px;
+    }
+    
+    .option-card h3 {
+        font-size: 20px;
+    }
+    
+    .option-card p {
+        font-size: 14px;
+    }
+    
+    .header-content {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+.icon-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.card-icon {
+    width: 8rem;
+    height: 8rem;
+    transition: transform 0.3s ease;
+}
+
+.option-card:hover .card-icon {
+    transform: scale(1.1);
+}
+
+/* If your SVG has a fill color you want to change on hover */
+.card-icon path {
+    fill: var(--primary-color);
+    transition: fill 0.3s ease;
+}
+
+.option-card:hover .card-icon path {
+    fill: var(--primary-hover);
+}

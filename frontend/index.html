@@ -1,0 +1,51 @@
+<!-- frontend/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Assistant - Login</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-box">
+            <div id="loginSection">
+                <h2>Login to Sales Assistant</h2>
+                <form id="loginForm" class="auth-form">
+                    <div class="form-group">
+                        <input type="email" id="loginEmail" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="loginPassword" placeholder="Password" required>
+                    </div>
+                    <button type="submit" class="auth-button">Login</button>
+                </form>
+                <p>Don't have an account? <a href="#" id="showSignup">Sign up</a></p>
+            </div>
+
+            <div id="signupSection" style="display: none;">
+                <h2>Create Account</h2>
+                <form id="signupForm" class="auth-form">
+                    <div class="form-group">
+                        <input type="text" id="signupName" placeholder="Full Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="signupEmail" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="signupPassword" placeholder="Password" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+                    </div>
+                    <button type="submit" class="auth-button">Sign Up</button>
+                </form>
+                <p>Already have an account? <a href="#" id="showLogin">Login</a></p>
+            </div>
+        </div>
+    </div>
+    <script src="js/auth.js"></script>
+</body>
+</html>

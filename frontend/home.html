@@ -1,0 +1,40 @@
+<!-- frontend/home.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Assistant - Home</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="user-info">
+                <h3>Welcome, <span id="userName">User</span></h3>
+            </div>
+            <button id="logoutBtn" class="logout-btn">Logout</button>
+        </div>
+    </header>
+
+    <div class="home-container">
+        <h1>Sales Assistant Dashboard</h1>
+        <div class="options-container">
+            <div class="option-card" id="text1">
+                <div class="icon-container">
+                    <img src="assets/chat.svg" alt="Chat Icon" class="card-icon">
+                </div>
+                <h3>Chat with our bot</h3>
+            </div>
+            <div class="option-card" id="text2">
+                <div class="icon-container">
+                    <img src="assets/book.svg" alt="Book Icon" class="card-icon">
+                </div>
+                <h3>Learning modules</h3>
+            </div>
+        </div>
+    </div>
+    <script src="js/home.js"></script>
+</body>
+</html>
