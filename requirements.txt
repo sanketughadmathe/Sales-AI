@@ -8,3 +8,10 @@ python-dotenv==1.0.1
 pyvespa==0.50.0
 supabase==2.10.0
 torch==2.5.1
+vespacli
+claudette
+transformers
+poppler-utils
+pdf2image
+pypdf
+qwen_vl_utils
