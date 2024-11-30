@@ -1,107 +1,65 @@
 document.addEventListener('DOMContentLoaded', () => {
     const chatMessages = document.getElementById('chatMessages');
-    const chatForm = document.getElementById('chatForm');
-    const chatInput = document.getElementById('chatInput');
-    const logoutBtn = document.getElementById('logoutBtn');
+    const messageInput = document.getElementById('messageInput');
+    const sendButton = document.getElementById('sendButton');
+    const backButton = document.getElementById('backBtn');
 
-    // Check authentication
-    const token = localStorage.getItem('token');
-    if (!token) {
-        window.location.replace('/index.html');
-        return;
-    }
-
-    // Auto-resize textarea
-    chatInput.addEventListener('input', () => {
-        chatInput.style.height = 'auto';
-        chatInput.style.height = chatInput.scrollHeight + 'px';
+    backButton.addEventListener('click', () => {
+        window.location.href = 'home.html';
     });
 
-    // Handle form submission
-    chatForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        const message = chatInput.value.trim();
+    async function sendMessage() {
+        const message = messageInput.value.trim();
         if (!message) return;
 
         // Add user message to chat
         addMessage(message, 'user');
-        
-        // Clear input
-        chatInput.value = '';
-        chatInput.style.height = 'auto';
-
-        // Show loading state
-        const loadingMessage = addLoadingMessage();
+        messageInput.value = '';
 
         try {
-            const response = await fetch('http://localhost:8000/chat/chat', {
+            const response = await fetch('http://localhost:8000/api/chat', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify({ query: message })
+                body: JSON.stringify({ message })
             });
-        
-            const data = await response.json();
-            
-            // Remove loading message
-            loadingMessage.remove();
-        
-            if (data.results && data.results.length > 0) {
-                data.results.forEach(result => {
-                    const messageText = `${result.text}\nConfidence: ${(result.confidence * 100).toFixed(2)}%`;
-                    addMessage(messageText, 'assistant', result.image);
-                });
-                
-                // Add query time information
-                addMessage(`Query processed in ${data.query_time} seconds`, 'system');
-            } else {
-                addMessage('I couldn\'t find relevant information in the documents.', 'assistant');
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
             }
-        
+
+            const data = await response.json();
+            addMessage(data.response, 'assistant', data.images);
         } catch (error) {
             console.error('Error:', error);
-            loadingMessage.remove();
-            addMessage('Sorry, there was an error processing your request.', 'system');
+            addMessage('Sorry, there was an error processing your request.', 'assistant');
         }
-    });
+    }
 
-    // Handle logout
-    logoutBtn.addEventListener('click', () => {
-        localStorage.removeItem('token');
-        window.location.replace('/index.html');
-    });
-
-    // Utility functions
-    function addMessage(text, type, image = null) {
+    function addMessage(text, sender, images = []) {
         const messageDiv = document.createElement('div');
-        messageDiv.className = `message ${type}`;
+        messageDiv.className = `message ${sender}-message`;
         messageDiv.textContent = text;
 
-        if (image) {
-            const img = document.createElement('img');
-            img.src = `data:image/png;base64,${image}`;
-            img.className = 'result-image';
-            messageDiv.appendChild(img);
+        if (images && images.length > 0) {
+            images.forEach(imageData => {
+                const img = document.createElement('img');
+                img.src = `data:image/jpeg;base64,${imageData}`;
+                img.className = 'message-image';
+                messageDiv.appendChild(img);
+            });
         }
 
         chatMessages.appendChild(messageDiv);
         chatMessages.scrollTop = chatMessages.scrollHeight;
-        return messageDiv;
     }
 
-    function addLoadingMessage() {
-        const loadingDiv = document.createElement('div');
-        loadingDiv.className = 'message assistant loading-dots';
-        loadingDiv.innerHTML = `
-            <span></span>
-            <span></span>
-            <span></span>
-        `;
-        chatMessages.appendChild(loadingDiv);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-        return loadingDiv;
-    }
+    sendButton.addEventListener('click', sendMessage);
+    messageInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            sendMessage();
+        }
+    });
 });

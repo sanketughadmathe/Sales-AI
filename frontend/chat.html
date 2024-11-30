@@ -3,62 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document Chat Assistant</title>
+    <title>Sales Assistant - Chat</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/chat.css">
 </head>
 <body>
+    <header class="header">
+        <div class="header-content">
+            <div class="user-info">
+                <h3>Chat with Sales Assistant</h3>
+            </div>
+            <button id="backBtn" class="back-btn">Back to Home</button>
+        </div>
+    </header>
+
     <div class="chat-container">
-        <!-- Sidebar for document context -->
-        <aside class="chat-sidebar">
-            <div class="sidebar-header">
-                <h3>Documents</h3>
-            </div>
-            <div class="document-list">
-                <div class="document-item active">
-                    <span class="doc-icon">📄</span>
-                    <span class="doc-title">Tesla Finance</span>
-                </div>
-                <div class="document-item">
-                    <span class="doc-icon">📄</span>
-                    <span class="doc-title">Basic Finance Understanding</span>
-                </div>
-            </div>
-        </aside>
-
-        <!-- Main chat area -->
-        <main class="chat-main">
-            <!-- Chat header -->
-            <div class="chat-header">
-                <h2>Document Chat Assistant</h2>
-                <button id="logoutBtn" class="logout-btn">Logout</button>
-            </div>
-
-            <!-- Chat messages -->
-            <div class="chat-messages" id="chatMessages">
-                <div class="message system">
-                    Hello! I can help you analyze and understand the financial documents. What would you like to know?
-                </div>
-                <!-- Messages will be added here dynamically -->
-            </div>
-
-            <!-- Chat input -->
-            <div class="chat-input-container">
-                <form id="chatForm">
-                    <textarea 
-                        id="chatInput" 
-                        placeholder="Ask a question about the documents..."
-                        rows="1"
-                        autocomplete="off"
-                    ></textarea>
-                    <button type="submit" id="sendButton">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <path d="M22 2L11 13M22 2L15 22L11 13M11 13L2 9L22 2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </button>
-                </form>
-            </div>
-        </main>
+        <div class="chat-messages" id="chatMessages"></div>
+        <div class="chat-input">
+            <textarea id="messageInput" placeholder="Type your message..."></textarea>
+            <button id="sendButton">Send</button>
+        </div>
     </div>
     <script src="js/chat.js"></script>
 </body>

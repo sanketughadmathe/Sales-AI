@@ -72,7 +72,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const text2Card = document.getElementById('text2');
     
     text1Card.addEventListener('click', () => {
-        alert('Text 1 option selected');
+        // alert('Text 1 option selected');
+        window.location.href = 'chat.html';
         // Add your navigation or action logic here
     });
     
